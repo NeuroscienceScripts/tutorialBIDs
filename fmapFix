@@ -1,0 +1,50 @@
+#!/bin/bash
+#rename fmap files after heudiConv
+
+workDir=/data2/users/liz/MLINDIV2/dataBids   #CHANGE TO WORK DIR
+
+for((i=01; i<=100; i++)); do #cycles through subjects
+
+        if [[ $i -lt 10 ]];
+        then
+                sub='sub-sub00'$i
+        
+        elif [[ $i -lt 100 ]]
+        then
+                sub='sub-sub0'$i
+        else
+                sub='sub-sub'$i
+        fi
+
+        echo
+        echo ----------------
+        echo Subject $sub
+        echo ----------------
+
+	#Changes names to BIDS format
+	mv $workDir/$sub/fmap/$sub\_run-1_phasediff1.nii.gz $workDir/$sub/fmap/$sub\_magnitude1.nii.gz
+	mv $workDir/$sub/fmap/$sub\_run-1_phasediff2.nii.gz $workDir/$sub/fmap/$sub\_magnitude2.nii.gz
+	mv $workDir/$sub/fmap/$sub\_run-2_phasediff.nii.gz $workDir/$sub/fmap/$sub\_phasediff.nii.gz
+	
+	#Removes old json files
+	rm $workDir/$sub/fmap/$sub\_run-1_phasediff1.json
+	rm $workDir/$sub/fmap/$sub\_run-1_phasediff2.json
+	rm $workDir/$sub/fmap/$sub\_run-2_phasediff.json
+	rm $workDir/$sub/fmap/$sub\_phasediff.json
+
+	#Creates new json file
+	printf '{\n  \"EchoTime1\": 0.00492,\n  \"EchoTime2\": 0.00738,\n  \"IntendedFor\": [\"func/'$sub'_task-boldEx_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-boldEx2_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-boldRun1_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-boldRun2_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-boldRun3_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-boldRun4_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-boldRun5_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-boldRun6_run-1_bold.nii.gz\",
+		\"func/'$sub'_task-rest_run-1_bold.nii.gz\",
+		\"dwi/'$sub'_run-1_dwi.nii.gz\",
+		\"dwi/'$sub'_run-2_dwi.nii.gz\"]
+}' > $workDir/$sub/fmap/$sub\_phasediff.json
+	 
+done
+

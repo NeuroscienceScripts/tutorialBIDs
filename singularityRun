@@ -1,0 +1,1 @@
+singularity run --cleanenv -B /data2/users/liz/MLINDIV2:/work /data2/users/liz/MLINDIV2/Preprocess/fmriprep.simg /work/dataBids2 /work/fmriPrepProcessed2 participant -w /work/workDir --fs-license-file /work/Preprocess/license.txt --output-spaces MNI152NLin6Asym

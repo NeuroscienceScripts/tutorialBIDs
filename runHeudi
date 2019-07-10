@@ -1,0 +1,24 @@
+#!/bin/bash
+#run with edited heuristic file#
+
+for((i=0; i<=100; i++)); do #cycle through subjects
+
+	if [[ $i -lt 10 ]];
+        then
+                sub='sub-00'$i
+	
+	elif [[ $i -lt 100 ]]
+	then
+		sub='sub-0'$i
+	else
+		sub='sub-'$i
+	fi
+
+        echo 
+        echo ----------------
+        echo $sub
+        echo ----------------
+
+	docker run --rm -it -v /data2/users/liz/MLINDIV2/Preprocess:/main:ro -v /data2/users/liz/MLINDIV2/dataBids:/output nipy/heudiconv:latest -d /main/rawData/{subject}/* -s $sub -ss 1 -f /main/heudiConv/convertConf.py -c dcm2niix -b -o /output
+
+done

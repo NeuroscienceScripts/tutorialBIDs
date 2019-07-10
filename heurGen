@@ -1,0 +1,3 @@
+#generate heuristic file
+docker run --rm -it -v /data2/users/liz/MLINDIV/fmriPrep/dataRaw:/data:ro -v /data2/users/jsmith:/output nipy/heudiconv:latest -d /data/{subject}/* -s 020 --ses 1 -f convertall -c none -o /output
+
