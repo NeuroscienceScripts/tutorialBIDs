@@ -1,0 +1,30 @@
+#!/bin/bash
+#Extracts RD information using FSLMaths
+#This script assumes subject files are prepended with 0s to the hundreds place
+#Delete lines "if" through "fi" to remove
+
+workDir=/data2/users/liz/MLINDIV2/dataBids   #CHANGE TO WORK DIR
+numSubjects = 113
+
+for((i=01; i<=$numsubjects; i++)); do #cycles through subjects
+
+        if [[ $i -lt 10 ]];
+        then
+                sub='sub-00'$i
+        
+        elif [[ $i -lt 100 ]]
+        then
+                sub='sub-0'$i
+        else
+                sub='sub-'$i
+        fi
+
+        echo
+        echo ----------------
+        echo Subject $sub
+        echo ----------------
+	
+	fslmaths ./reoriented/$sub*L2* -add ./reoriented/$sub*L3* -div 2 ./TBSS_analysis/RD/$sub'_run-2_dtifit_FA.nii.gz' 
+	
+
+done

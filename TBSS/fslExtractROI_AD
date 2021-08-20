@@ -1,0 +1,15 @@
+#! /bin/bash
+
+# Extracts FA information from processed data
+# Requires $FSLDIR to be properly set 
+# Specify path to atlas and number of atlas regions
+atlasPath = /usr/local/fsl/data/atlases/JHU/JHU-ICBM-labels-1mm.nii.gz
+numroi = 48
+
+for roinum in {1..$numroi}; do
+        fslmaths atlasPath -thr $roinum -uthr $roinum -bin roimask
+        fslmaths roimask -mas mean_FA_skeleton_mask.nii.gz -bin
+        padroi=`$FSLDIR/bin/zeropad $roinum 3`
+        fslmeants -i all_AD_skeletonised.nii.gz -m roimask -o ./JHU-skeletonized-AD/meants_roi${padroi}.txt
+
+done

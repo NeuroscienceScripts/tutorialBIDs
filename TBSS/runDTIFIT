@@ -1,0 +1,30 @@
+#!/bin/bash
+#runs dtifit
+
+workDir=/data2/users/liz/MLINDIV2/dataBids   #CHANGE TO WORK DIR
+
+fsl&
+
+for((i=01; i<=113; i++)); do #cycles through subjects
+
+        if [[ $i -lt 10 ]];
+        then
+                sub='sub-00'$i
+        
+        elif [[ $i -lt 100 ]]
+        then
+                sub='sub-0'$i
+        else
+                sub='sub-'$i
+        fi
+
+        echo
+        echo ----------------
+        echo Subject $sub
+        echo ----------------
+
+	dtifit -k ./$sub/*_dwi.nii.gz -o ./output/"$sub"_run-22_dtifit -m ./$sub/*mask.nii.gz -r ./$sub/*.bvec -b ./$sub/*.bval
+	
+	mv ./output/*FA* ./FA/
+	mv ./output/*MD* ./MD/
+done

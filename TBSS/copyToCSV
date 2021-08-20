@@ -1,0 +1,23 @@
+#!/bin/bash
+#turn txt to csv
+
+for((i=01; i<=48; i++)); do #cycles through rois
+
+        if [[ $i -lt 10 ]];
+        then
+               roi='roi00'$i
+
+        elif [[ $i -lt 100 ]]
+        then
+                roi='roi0'$i
+        else
+                roi='roi'$i
+        fi
+
+        echo
+        echo ----------------
+        echo Subject $roi
+        echo ----------------
+
+	cp ./meants_$roi.txt ./meants_$roi.csv
+done

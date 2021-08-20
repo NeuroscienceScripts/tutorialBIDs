@@ -1,0 +1,2 @@
+for f in ./*.nii.gz; do fslreorient2std $f ../reoriented/$f;
+done
