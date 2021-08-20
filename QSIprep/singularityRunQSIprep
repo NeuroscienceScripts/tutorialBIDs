@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+	singularity run --cleanenv -B ~/Liz/NewPreprocess/:/work/ -B ~/Liz/NewPreprocess/niworkflows_data:/niworkflows_data ~/Liz/NewPreprocess/qsiprep-0.4.5.simg --bids_dir /work/bids/ --output_dir /work/qsiPrep_processed --analysis_level participant -w /work/qsiWork --output_resolution 1.8 --fs-license-file /work/license.txt --dwi_denoise_window 5 --force-spatial-normalization --hmc_model 3dSHORE --hmc-transform Rigid --shoreline_iters 2
+

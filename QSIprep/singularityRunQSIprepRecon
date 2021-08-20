@@ -1,0 +1,1 @@
+singularity run --cleanenv -B /home/justin/Liz/recon/:/work -B /home/justin/Liz/recon/niworkflows_data:/niworkflows_data /home/justin/Liz/recon/qsiprep-0.4.5.simg --bids_dir /work/bids/  --recon_input /work/qsiprep/ --recon_spec /work/dipy_dsistudio_mrtrix.json --output_dir /work/recon/ --output_resolution 1.8 --analysis_level participant --fs-license-file /work/license.txt
