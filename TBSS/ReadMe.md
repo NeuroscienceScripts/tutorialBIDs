@@ -1,8 +1,7 @@
 This folder contains scripts for TBSS analysis.
 
 Most scripts have the following code block: 
-''' 
-if [[ $i -lt 10 ]];
+''' if [[ $i -lt 10 ]];
 then
         sub='sub-00'$i
 
