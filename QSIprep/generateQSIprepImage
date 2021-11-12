@@ -1,1 +1,1 @@
-singularity build qsiprep-<version>.sif docker://pennbbl/qsiprep:0.4.5
+singularity build qsiprep-0.4.5.sif docker://pennbbl/qsiprep:0.4.5
